@@ -7,6 +7,7 @@ const button = document.querySelector('button');
 let wins = numTries = 0;
 let selectedValues = [];
 let values = generateValues();
+let gameStarted = false;
 
 //FUNCTIONS
 function generateValues(){
@@ -25,11 +26,12 @@ function shuffleArray(array) {
 }
 
 function startGame(){
+    gameStarted = true;
     values = generateValues();
     shuffleArray(values)
     innerText.forEach((card, i) => {
-        card.textContent = values[i];
         card.classList.remove('show');
+        card.textContent = values[i];
     })
     button.classList.remove('play-again');
     selectedValues = [];
@@ -42,6 +44,7 @@ function wonGame(){
     status.textContent = 'YOU WON!!';
     button.classList.add('play-again');
     button.textContent = 'Play Again';
+    gameStarted = false;
 }
 
 function incrementTry(){
@@ -72,6 +75,8 @@ function checkGuess(e){
 //EVENT LISTENERS
 button.addEventListener('click', startGame);
 cards.forEach(card => card.addEventListener('click', (e) => {
-    checkGuess(e);
-    (wins === (cards.length / 2)) ? wonGame() : null;
+    if(gameStarted){
+        checkGuess(e);
+        (wins === (cards.length / 2)) ? wonGame() : null;
+    }
 }))
