@@ -37,7 +37,7 @@ function startGame(){
     selectedValues = [];
     numTries = wins = 0;
     status.textContent = '';
-    tries.textContent = numTries;
+    tries.textContent = `Number of Tries: ${numTries}`;
 }
 
 function wonGame(){
@@ -49,7 +49,7 @@ function wonGame(){
 
 function incrementTry(){
     numTries ++;
-    tries.textContent = numTries;
+    tries.textContent = `Number of Tries: ${numTries}`;
 }
 
 function checkGuess(e){
